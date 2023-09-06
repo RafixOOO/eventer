@@ -46,18 +46,22 @@ function OffCanvasExample({ name, ...props }) {
   const handleClose = () => setShow(false);
   const toggleShow = () => setShow((s) => !s);
 
+  const offcanvasStyle = {
+    maxWidth: '35%', // Ustaw szerokość na 10%
+  };
+
   return (
     <>
       <Nav.Link onClick={toggleShow}>
         {name}
       </Nav.Link>
-      <Offcanvas show={show} onHide={handleClose} {...props}>
+      <Offcanvas show={show} onHide={handleClose} style={offcanvasStyle} {...props}>
         <Offcanvas.Header closeButton>
           <Offcanvas.Title>Groups</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
-          Some text as placeholder. In real life you can have the elements you
-          have chosen. Like, text, images, lists, etc.
+          Some text as a placeholder. In real life, you can have the elements you
+          have chosen, like text, images, lists, etc.
         </Offcanvas.Body>
       </Offcanvas>
     </>
