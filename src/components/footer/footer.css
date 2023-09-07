@@ -1,0 +1,19 @@
+.wrapper {
+    width: 100%;
+    height: 50px; /* Height of the footer */
+    background: #212529;
+    text-align: center;
+    position: relative;
+  
+    .content {
+      font-weight: 500;
+      margin: 0;
+      position: absolute;
+      top: 50%;
+      color: white;
+      left: 50%;
+      -ms-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+    }
+  
+  }
