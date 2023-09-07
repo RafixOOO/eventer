@@ -7,7 +7,7 @@ import Logo from './logo.svg';
 function GridExample() {
   return (
     <Row xs={1} md={2} className="g-4">
-      {Array.from({ length: 8 }).map((_, idx) => (
+      {Array.from({ length: 16 }).map((_, idx) => (
         <Col key={idx}>
           <Card>
             <Card.Img variant="top" style={{maxheight: '400px'}} src={Logo} className='img-fluid' />
