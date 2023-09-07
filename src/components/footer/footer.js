@@ -8,7 +8,7 @@ const Footer = () => {
         <br />
         <div className={'wrapper'}>
             <div className={'content'}>
-                © 2023. All Rights Reserved.
+                Rafał Pezda © 2023. All Rights Reserved.
             </div>
         </div>
         </>
