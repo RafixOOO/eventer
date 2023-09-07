@@ -14,24 +14,24 @@ function GridExample() {
             <Card.Body>
               <Card.Title>Card title</Card.Title>
               <Card.Text>
-                This is a longer card with supporting text below as a natural
+                <p>This is a longer card with supporting text below as a natural
                 lead-in to additional content. This content is a little bit
-                longer.
-                This is a longer card with supporting text below as a natural
+                longer.</p>
+                <p>This is a longer card with supporting text below as a natural
                 lead-in to additional content. This content is a little bit
-                longer.
-                This is a longer card with supporting text below as a natural
+                longer.</p>
+                <p>This is a longer card with supporting text below as a natural
                 lead-in to additional content. This content is a little bit
-                longer.
-                This is a longer card with supporting text below as a natural
+                longer.</p>
+                <p>This is a longer card with supporting text below as a natural
                 lead-in to additional content. This content is a little bit
-                longer.
-                This is a longer card with supporting text below as a natural
+                longer.</p>
+                <p>This is a longer card with supporting text below as a natural
                 lead-in to additional content. This content is a little bit
-                longer.
-                This is a longer card with supporting text below as a natural
+                longer.</p>
+                <p>This is a longer card with supporting text below as a natural
                 lead-in to additional content. This content is a little bit
-                longer.
+                longer.</p>
               </Card.Text>
             </Card.Body>
           </Card>

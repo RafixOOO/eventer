@@ -70,33 +70,30 @@ function OffCanvasExample({ name, ...props }) {
           <Offcanvas.Title>Groups</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
-          Some text as a placeholder. In real life, you can have the elements you
-          have chosen, like text, images, lists, etc.
-          Some text as a placeholder. In real life, you can have the elements you
-          have chosen, like text, images, lists, etc.
-          Some text as a placeholder. In real life, you can have the elements you
-          have chosen, like text, images, lists, etc.
-          Some text as a placeholder. In real life, you can have the elements you
-          have chosen, like text, images, lists, etc.
-          Some text as a placeholder. In real life, you can have the elements you
-          have chosen, like text, images, lists, etc.
-          Some text as a placeholder. In real life, you can have the elements you
-          have chosen, like text, images, lists, etc.
-          Some text as a placeholder. In real life, you can have the elements you
-          have chosen, like text, images, lists, etc.
-
-          Some text as a placeholder. In real life, you can have the elements you
-          have chosen, like text, images, lists, etc.
-          Some text as a placeholder. In real life, you can have the elements you
-          have chosen, like text, images, lists, etc.
-          Some text as a placeholder. In real life, you can have the elements you
-          have chosen, like text, images, lists, etc.
-          Some text as a placeholder. In real life, you can have the elements you
-          have chosen, like text, images, lists, etc.
-          Some text as a placeholder. In real life, you can have the elements you
-          have chosen, like text, images, lists, etc.
-          Some text as a placeholder. In real life, you can have the elements you
-          have chosen, like text, images, lists, etc.
+          <p>Some text as a placeholder. In real life, you can have the elements you
+          have chosen, like text, images, lists, etc.</p>
+          <p>Some text as a placeholder. In real life, you can have the elements you
+          have chosen, like text, images, lists, etc.</p>
+          <p>Some text as a placeholder. In real life, you can have the elements you
+          have chosen, like text, images, lists, etc.</p>
+          <p>Some text as a placeholder. In real life, you can have the elements you
+          have chosen, like text, images, lists, etc.</p>
+          <p>Some text as a placeholder. In real life, you can have the elements you
+          have chosen, like text, images, lists, etc.</p>
+          <p>Some text as a placeholder. In real life, you can have the elements you
+          have chosen, like text, images, lists, etc.</p>
+          <p>Some text as a placeholder. In real life, you can have the elements you
+          have chosen, like text, images, lists, etc.</p>
+          <p>Some text as a placeholder. In real life, you can have the elements you
+          have chosen, like text, images, lists, etc.</p>
+          <p>Some text as a placeholder. In real life, you can have the elements you
+          have chosen, like text, images, lists, etc.</p>
+          <p>Some text as a placeholder. In real life, you can have the elements you
+          have chosen, like text, images, lists, etc.</p>
+          <p>Some text as a placeholder. In real life, you can have the elements you
+          have chosen, like text, images, lists, etc.</p>
+          <p>Some text as a placeholder. In real life, you can have the elements you
+          have chosen, like text, images, lists, etc.</p>
         </Offcanvas.Body>
       </Offcanvas>
     </>
