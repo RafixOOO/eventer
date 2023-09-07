@@ -4,6 +4,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { useState } from 'react';
 import Offcanvas from 'react-bootstrap/Offcanvas';
+import Login from '../login/login';
 
 const options = [
   {
@@ -27,7 +28,7 @@ function Navigation() {
           </Nav>
           <Navbar.Collapse className="justify-content-end">
           <Navbar.Text>
-          <a href="#login">Sign in</a>
+          <Login />
           </Navbar.Text>
         </Navbar.Collapse>
         </Container>
