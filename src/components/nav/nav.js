@@ -15,32 +15,40 @@ const options = [
 ];
 
 function Navigation() {
-  return (
-    <>
-      <Navbar bg="dark" data-bs-theme="dark">
-        <Container>
-          <Navbar.Brand href="">Eventer</Navbar.Brand>
-          <Nav className="me-auto">
-            {options.map((props, idx) => (
-        <OffCanvasExample key={idx} {...props} />
-      ))}
-            <Nav.Link href="#features">Events</Nav.Link>
-          </Nav>
-          <Navbar.Collapse className="justify-content-end">
-          <Navbar.Text>
+    return (
+        <>
+        <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary" bg="dark" data-bs-theme="dark">
+          <Container fluid>
+          <Navbar.Brand>Eventer</Navbar.Brand>
+
+            <Navbar.Toggle aria-controls="navbarScroll" />
+            <Navbar.Collapse id="navbarScroll">
+              <Nav
+                className="me-auto my-2 my-lg-0"
+                style={{ maxHeight: '100px' }}
+                navbarScroll
+              >
+                            {options.map((props, idx) => (
+                    <OffCanvasExample key={idx} {...props} />
+                ))}
+                <Nav.Link href="#features">Events</Nav.Link>
+                <Nav.Link href="#features">Callendar</Nav.Link>
+                
+              </Nav>
+              <Navbar.Collapse className="justify-content-end">
+              <Navbar.Text>
           <Login />
           </Navbar.Text>
         </Navbar.Collapse>
-        </Container>
-      </Navbar>
-      <br />
-    </>
-  );
+            </Navbar.Collapse>
+          </Container>
+        </Navbar>
+        
+        <br />
+        </>
+      );
 }
-
 export default Navigation;
-
-
 
 function OffCanvasExample({ name, ...props }) {
   const [show, setShow] = useState(false);
@@ -49,7 +57,7 @@ function OffCanvasExample({ name, ...props }) {
   const toggleShow = () => setShow((s) => !s);
 
   const offcanvasStyle = {
-    maxWidth: '35%', // Ustaw szerokość na 10%
+    maxWidth: '40%', // Ustaw szerokość na 10%
   };
 
   return (

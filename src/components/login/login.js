@@ -12,7 +12,7 @@ function Example() {
 
   return (
     <>
-      <a href="#" onClick={handleShow}>
+      <a href="#login" onClick={handleShow}>
         Sign in
       </a>
 
@@ -30,7 +30,7 @@ function Example() {
                 autoFocus
               />
             </Form.Group>
-            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput2">
               <Form.Label>Password</Form.Label>
               <Form.Control
                 type="password"
