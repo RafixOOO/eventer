@@ -2,7 +2,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Card from 'react-bootstrap/Card';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
-import Logo from './logo.svg';
 import React, { useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Linkify from 'react-linkify';
@@ -34,11 +33,11 @@ longer.`;
   const [showModal, setShowModal] = useState(false);
 
   return (
-    <Row xs={1} md={2} className="g-4">
+    <Row xs={1} md={1} className="g-4">
       {Array.from({ length: 16 }).map((_, idx) => (
         <Col key={idx}>
           <Card>
-            <Card.Img variant="top" style={{ maxHeight: '400px' }} src={Logo} className='img-fluid' />
+            <Card.Img variant="top" style={{ Height: '40vw', width:'60vh'}} src='./img/img2.jpg' className='mx-auto'/>
             <Card.Body>
               <Card.Title>{title}</Card.Title>
               <Card.Text>
@@ -62,7 +61,7 @@ longer.`;
           <Modal.Title>{title}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-        <Card.Img variant="top" style={{ maxHeight: '400px' }} src={Logo} className='img-fluid' />
+        <Card.Img variant="top" style={{ maxHeight: '400px' }} src='src\components\events\img\img2.jpg' className='img-fluid' />
         <Linkify>{text}</Linkify>
         </Modal.Body>
         <Modal.Footer>
