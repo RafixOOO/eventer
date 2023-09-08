@@ -37,7 +37,7 @@ longer.`;
       {Array.from({ length: 16 }).map((_, idx) => (
         <Col key={idx}>
           <Card>
-            <Card.Img variant="top" style={{ Height: '40vw', width:'60vh'}} src='./img/img2.jpg' className='mx-auto'/>
+            <Card.Img variant="top" style={{ Height: '40vw', width:'60vh'}} src='/static/media/img2.a53c91ba984d6be902ac.jpg' className='mx-auto'/>
             <Card.Body>
               <Card.Title>{title}</Card.Title>
               <Card.Text>
