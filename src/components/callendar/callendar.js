@@ -18,15 +18,6 @@ export default class DemoApp extends React.Component {
         eventClick={false}
         events={[
             { title: 'event 1', date: '2023-09-01', url: 'https://www.example.com/event1' },
-            { title: 'event 1', date: '2023-09-01', url: 'https://www.example.com/event1' },
-            { title: 'event 1', date: '2023-09-01', url: 'https://www.example.com/event1' },
-            { title: 'event 1', date: '2023-09-01', url: 'https://www.example.com/event1' },
-            { title: 'event 1', date: '2023-09-01', url: 'https://www.example.com/event1' },
-            { title: 'event 1', date: '2023-09-01', url: 'https://www.example.com/event1' },
-            { title: 'event 1', date: '2023-09-01', url: 'https://www.example.com/event1' },
-            { title: 'event 1', date: '2023-09-01', url: 'https://www.example.com/event1' },
-            { title: 'event 1', date: '2023-09-01', url: 'https://www.example.com/event1' },
-            { title: 'event 1', date: '2023-09-01', url: 'https://www.example.com/event1' },
         ]}
       />
     )

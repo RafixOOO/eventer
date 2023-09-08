@@ -5,9 +5,10 @@ import Row from 'react-bootstrap/Row';
 import Logo from './logo.svg';
 import React, { useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
+import Linkify from 'react-linkify';
 
 function GridExample() {
-  const maxTextLength = 150;
+  const maxTextLength = 200;
   const title = 'Card title';
   const text = `This is a longer card with supporting text below as a natural
 lead-in to additional content. This content is a little bit
@@ -15,15 +16,7 @@ longer.
 This is a longer card with supporting text below as a natural
 lead-in to additional content. This content is a little bit
 longer.
-This is a longer card with supporting text below as a natural
-lead-in to additional content. This content is a little bit
-longer.
-This is a longer card with supporting text below as a natural
-lead-in to additional content. This content is a little bit
-longer.
-This is a longer card with supporting text below as a natural
-lead-in to additional content. This content is a little bit
-longer.
+https://tarkon.pl/
 This is a longer card with supporting text below as a natural
 lead-in to additional content. This content is a little bit
 longer.`;
@@ -49,7 +42,7 @@ longer.`;
             <Card.Body>
               <Card.Title>{title}</Card.Title>
               <Card.Text>
-                {truncatedText}
+              <Linkify>{truncatedText}</Linkify>
                 {!showModal && text.length > maxTextLength && (
                   <span
                     onClick={handleShowModal}
@@ -70,7 +63,7 @@ longer.`;
         </Modal.Header>
         <Modal.Body>
         <Card.Img variant="top" style={{ maxHeight: '400px' }} src={Logo} className='img-fluid' />
-          {text}
+        <Linkify>{text}</Linkify>
         </Modal.Body>
         <Modal.Footer>
           <button className="btn btn-secondary" onClick={handleCloseModal}>
