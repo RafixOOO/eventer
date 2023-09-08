@@ -5,6 +5,10 @@ import Navbar from 'react-bootstrap/Navbar';
 import { useState } from 'react';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import Login from '../login/login';
+import Badge from 'react-bootstrap/Badge';
+import ListGroup from 'react-bootstrap/ListGroup';
+import Image from 'react-bootstrap/Image';
+import Logo from './logo.svg';
 
 const options = [
   {
@@ -31,8 +35,9 @@ function Navigation() {
                             {options.map((props, idx) => (
                     <OffCanvasExample key={idx} {...props} />
                 ))}
-                <Nav.Link href="#features">Events</Nav.Link>
-                <Nav.Link href="#features">Callendar</Nav.Link>
+                <Nav.Link href="/">Events</Nav.Link>
+                <Nav.Link href="/callendar">Callendar</Nav.Link>
+                <Nav.Link href="/contact">Contact</Nav.Link>
                 
               </Nav>
               <Navbar.Collapse className="justify-content-end">
@@ -70,32 +75,53 @@ function OffCanvasExample({ name, ...props }) {
           <Offcanvas.Title>Groups</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
-          <p>Some text as a placeholder. In real life, you can have the elements you
-          have chosen, like text, images, lists, etc.</p>
-          <p>Some text as a placeholder. In real life, you can have the elements you
-          have chosen, like text, images, lists, etc.</p>
-          <p>Some text as a placeholder. In real life, you can have the elements you
-          have chosen, like text, images, lists, etc.</p>
-          <p>Some text as a placeholder. In real life, you can have the elements you
-          have chosen, like text, images, lists, etc.</p>
-          <p>Some text as a placeholder. In real life, you can have the elements you
-          have chosen, like text, images, lists, etc.</p>
-          <p>Some text as a placeholder. In real life, you can have the elements you
-          have chosen, like text, images, lists, etc.</p>
-          <p>Some text as a placeholder. In real life, you can have the elements you
-          have chosen, like text, images, lists, etc.</p>
-          <p>Some text as a placeholder. In real life, you can have the elements you
-          have chosen, like text, images, lists, etc.</p>
-          <p>Some text as a placeholder. In real life, you can have the elements you
-          have chosen, like text, images, lists, etc.</p>
-          <p>Some text as a placeholder. In real life, you can have the elements you
-          have chosen, like text, images, lists, etc.</p>
-          <p>Some text as a placeholder. In real life, you can have the elements you
-          have chosen, like text, images, lists, etc.</p>
-          <p>Some text as a placeholder. In real life, you can have the elements you
-          have chosen, like text, images, lists, etc.</p>
+          <DefaultExample />
         </Offcanvas.Body>
       </Offcanvas>
     </>
+  );
+}
+
+
+function DefaultExample() {
+  return (
+    <ListGroup as="ol">
+      <ListGroup.Item
+        as="li"
+        className="d-flex justify-content-between align-items-start"
+      >
+        <Image style={{maxheight: '30px', maxWidth: '30px'}} src={Logo}  roundedCircle />
+        <div className="ms-2 me-auto">
+        <div className="fw-bold"><Nav.Link href="#group">Subheading</Nav.Link></div>
+        </div>
+        <Badge bg="danger" pill>
+          14
+        </Badge>
+      </ListGroup.Item>
+      <ListGroup.Item
+        as="li"
+        className="d-flex justify-content-between align-items-start"
+      >
+        <Image style={{maxheight: '30px', maxWidth: '30px'}} src={Logo}  roundedCircle />
+        <div className="ms-2 me-auto">
+        <div className="fw-bold"><Nav.Link href="#group">Subheading</Nav.Link></div>
+        </div>
+        <Badge bg="danger" pill>
+          14
+        </Badge>
+      </ListGroup.Item>
+      <ListGroup.Item
+        as="li"
+        className="d-flex justify-content-between align-items-start"
+      >
+          <Image style={{maxheight: '30px', maxWidth: '30px'}} src={Logo}  roundedCircle />
+        <div className="ms-2 me-auto">
+          <div className="fw-bold"><Nav.Link href="#group">Subheading</Nav.Link></div>
+        </div>
+        <Badge bg="danger" pill>
+          1
+        </Badge>
+      </ListGroup.Item>
+    </ListGroup>
   );
 }

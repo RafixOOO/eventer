@@ -1,6 +1,8 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Grid from './components/events/grid';
+import Callendar from './components/callendar/callendar';
+import Contact from './components/contact/contact';
 import './App.css';
 
 function App() {
@@ -9,7 +11,8 @@ function App() {
         <Router>
       <Routes>
         <Route path="/" element={<Grid />} />
-        {/* Dodaj inne trasy, jeśli są potrzebne */}
+        <Route path="/callendar" element={<Callendar />} />
+        <Route path="/contact" element={<Contact />} />
       </Routes>
     </Router>
     </div>
