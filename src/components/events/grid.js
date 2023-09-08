@@ -61,7 +61,7 @@ longer.`;
           <Modal.Title>{title}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-        <Card.Img variant="top" style={{ maxHeight: '400px' }} src={'./img/img2.jpg'} className='img-fluid' />
+        <Card.Img variant="top" style={{ Height: '10vw', width:'15vh'}} src='/static/media/img2.a53c91ba984d6be902ac.jpg' className='img-fluid' />
         <Linkify>{text}</Linkify>
         </Modal.Body>
         <Modal.Footer>
