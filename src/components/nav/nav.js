@@ -62,7 +62,7 @@ function OffCanvasExample({ name, ...props }) {
   const toggleShow = () => setShow((s) => !s);
 
   const offcanvasStyle = {
-    maxWidth: '40%', // Ustaw szerokość na 10%
+    maxWidth: '60%', // Ustaw szerokość na 10%
   };
 
   return (
@@ -90,7 +90,7 @@ function DefaultExample() {
         as="li"
         className="d-flex justify-content-between align-items-start"
       >
-        <Image style={{maxheight: '30px', maxWidth: '30px'}} src={Logo}  roundedCircle />
+        <Image style={{maxWidth: '100%',height: 'auto', maxHeight: '25px',}} src={Logo}  roundedCircle />
         <div className="ms-2 me-auto">
         <div className="fw-bold"><Nav.Link href="#group">Subheading</Nav.Link></div>
         </div>
@@ -102,9 +102,9 @@ function DefaultExample() {
         as="li"
         className="d-flex justify-content-between align-items-start"
       >
-        <Image style={{maxheight: '30px', maxWidth: '30px'}} src={Logo}  roundedCircle />
+        <Image style={{maxWidth: '100%',height: 'auto', maxHeight: '25px',}} src={Logo}  roundedCircle />
         <div className="ms-2 me-auto">
-        <div className="fw-bold"><Nav.Link href="#group">Subheading</Nav.Link></div>
+        <div style={{maxWidth: '100%'}} className="fw-bold"><Nav.Link href="#group">Subheading</Nav.Link></div>
         </div>
         <Badge bg="danger" pill>
           14
@@ -114,7 +114,7 @@ function DefaultExample() {
         as="li"
         className="d-flex justify-content-between align-items-start"
       >
-          <Image style={{maxheight: '30px', maxWidth: '30px'}} src={Logo}  roundedCircle />
+          <Image style={{maxWidth: '100%',height: 'auto', maxHeight: '25px',}} src={Logo}  roundedCircle />
         <div className="ms-2 me-auto">
           <div className="fw-bold"><Nav.Link href="#group">Subheading</Nav.Link></div>
         </div>
