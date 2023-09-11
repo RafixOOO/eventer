@@ -38,13 +38,17 @@ function Example() {
     })
     .then(response => {
       const responseData = response.data;
-      setToken(responseData.jwtToken);
+      if (responseData.jwtToken) {
+        setToken(responseData.jwtToken);
       setResponseEmail(responseData.username);
       handleClose();
+      } else {
+        // Token nie został otrzymany
+        setError('Błędne dane logowania.');
+      }
     })
     .catch(error => {
-      console.error('Błąd logowania:', error);
-      setError('Nieprawidłowe dane logowania.');
+      setError('Bład.');
     });
     
   };
