@@ -65,8 +65,11 @@ longer.`;
         <Linkify>{text}</Linkify>
         </Modal.Body>
         <Modal.Footer>
+        <button className="btn btn-secondary" onClick={handleCloseModal}>
+            Comments
+          </button>
           <button className="btn btn-secondary" onClick={handleCloseModal}>
-            Close
+            Add to Callendar
           </button>
         </Modal.Footer>
       </Modal>
