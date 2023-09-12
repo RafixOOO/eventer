@@ -5,18 +5,18 @@ import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import axios from 'axios';
 
-
 function Example() {
   const [show, setShow] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [token, setToken] = useState('');
-  const [responseEmail, setResponseEmail] = useState('');
   const [error, setError] = useState('');
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
+  const logout = () => {
+    sessionStorage.removeItem('authdata');
+    window.location.reload();
+  };
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     if (name === 'email') {
@@ -25,7 +25,6 @@ function Example() {
       setPassword(value);
     }
   };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     axios.post('http://localhost:8080/auth/login', {
@@ -36,69 +35,64 @@ function Example() {
         'Content-Type': 'application/json',
       }
     })
-    .then(response => {
-      const responseData = response.data;
-      if (responseData.jwtToken) {
-        setToken(responseData.jwtToken);
-      setResponseEmail(responseData.username);
-      handleClose();
-      } else {
-        // Token nie został otrzymany
-        setError('Błędne dane logowania.');
-      }
-    })
-    .catch(error => {
-      setError('Bład.');
-    });
-    
+      .then(response => {
+        const responseData = response.data;
+        if (responseData.jwtToken) {
+          sessionStorage.setItem('authdata', responseData.jwtToken);
+          setEmail(responseData.username);
+          handleClose();
+        } else {
+          // Token nie został otrzymany
+          setError('Błędne dane logowania.');
+        }
+      })
+      .catch(error => {
+        setError('Bład.');
+        console.log(error);
+      });
+
   };
+
 
   return (
     <>
       <a href="#login" onClick={handleShow}>
+
         Sign in
+
       </a>
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Login</Modal.Title>
+          <Modal.Title>Login
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          {token ? (
-            <div>
-              Zalogowano pomyślnie!
-              <br />
-              Otrzymano token dostępowy: {token}
-              <br />
-              Adres email: {responseEmail}
-            </div>
-          ) : (
-            <Form onSubmit={handleSubmit}>
-              <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                <Form.Label>Email address</Form.Label>
-                <Form.Control
-                  type="email"
-                  name="email"
-                  value={email}
-                  onChange={handleInputChange}
-                  placeholder="name@example.com"
-                  autoFocus
-                />
-              </Form.Group>
-              <Form.Group className="mb-3" controlId="exampleForm.ControlInput2">
-                <Form.Label>Password</Form.Label>
-                <Form.Control
-                  type="password"
-                  name="password"
-                  value={password}
-                  onChange={handleInputChange}
-                />
-              </Form.Group>
-              <Button variant="primary" type="Submit">
-                Login
-              </Button>
-            </Form>
-          )}
+          <Form onSubmit={handleSubmit}>
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>Email address</Form.Label>
+              <Form.Control
+                type="email"
+                name="email"
+                value={email}
+                onChange={handleInputChange}
+                placeholder="name@example.com"
+                autoFocus
+              />
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput2">
+              <Form.Label>Password</Form.Label>
+              <Form.Control
+                type="password"
+                name="password"
+                value={password}
+                onChange={handleInputChange}
+              />
+            </Form.Group>
+            <Button variant="primary" type="Submit">
+              Login
+            </Button>
+          </Form>
 
           {error && <p className="text-danger">{error}</p>}
         </Modal.Body>
@@ -108,6 +102,9 @@ function Example() {
           </Button>
           <Button variant="secondary" onClick={handleClose}>
             Forgot password
+          </Button>
+          <Button variant="secondary" onClick={logout}>
+            Logout
           </Button>
         </Modal.Footer>
       </Modal>

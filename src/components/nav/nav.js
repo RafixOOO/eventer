@@ -32,11 +32,22 @@ function Navigation() {
                 style={{ maxHeight: '100px' }}
                 navbarScroll
               >
-                            {options.map((props, idx) => (
-                    <OffCanvasExample key={idx} {...props} />
-                ))}
+                 {sessionStorage.getItem('authdata') ?  (
+                  <div>
+                    {options.map((props, idx) => (
+                      <OffCanvasExample key={idx} {...props} />
+                    ))}
+                    </div>
+                  ):(
+                  <div></div>
+                )}
                 <Nav.Link href="/">Events</Nav.Link>
-                <Nav.Link href="/callendar">Callendar</Nav.Link>
+                
+                {sessionStorage.getItem('authdata') ? (
+                  <Nav.Link href="/callendar">Callendar</Nav.Link>
+                ):(
+                  <div></div>
+                )}
                 <Nav.Link href="/contact">Contact</Nav.Link>
                 
               </Nav>
