@@ -41,6 +41,7 @@ function Example() {
           sessionStorage.setItem('authdata', responseData.jwtToken);
           setEmail(responseData.username);
           handleClose();
+          window.location.reload();
         } else {
           // Token nie został otrzymany
           setError('Błędne dane logowania.');
