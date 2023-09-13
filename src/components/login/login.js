@@ -47,6 +47,7 @@ function Example() {
       })
       .catch(error => {
         setError('Bład.');
+        sessionStorage.removeItem("authdata")
         console.log(error);
       });
 

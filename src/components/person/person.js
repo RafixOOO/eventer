@@ -1,9 +1,11 @@
 import { useState } from 'react';
-import React, {useEffect} from 'react';
+import { useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import axios from 'axios';
+import Col from 'react-bootstrap/Col';
+import Image from 'react-bootstrap/Image';
 
 function Example() {
   const [show, setShow] = useState(false);
@@ -16,6 +18,15 @@ function Example() {
   const logout = () => {
     sessionStorage.removeItem('authdata');
     window.location.reload();
+  };
+
+  const handleFileChange = (event) => {
+    const selectedFile = event.target.files[0];
+    if (selectedFile) {
+      const newFileName = {id}+'.jpg'; // Tutaj możesz wprowadzić własną nazwę
+
+  }
+    
   };
 
   useEffect(() => {
@@ -34,6 +45,7 @@ function Example() {
       })
       .catch(error => {
         console.log(error);
+        sessionStorage.removeItem("authdata")
       });
   }, []);
 
@@ -42,7 +54,7 @@ function Example() {
       <a href="#Person" onClick={handleShow}>
 
         <div>
-        {imie} {nazwisko}
+          {imie} {nazwisko} {id}
         </div>
       </a>
 
@@ -52,12 +64,21 @@ function Example() {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-        <div>
-          Jesteś zalogowany<br />
-          {imie} {nazwisko} {id}
-          </div>
+          <center>
+            <Col xs={6} md={4}>
+              <Image style={{ objectFit: 'scale-down', maxHeight: '180px', maxWidth: '171px' }} src={require('./img/img2.jpg')} roundedCircle />
+            </Col>
+            <br />
+            <div style={{ fontSize: '150%' }}>
+              {imie} {nazwisko}
+            </div>
+          </center>
         </Modal.Body>
         <Modal.Footer>
+          <input type="file" onChange={handleFileChange} id="fileInput" accept="image/jpeg, .jpg" style={{ display: 'none' }} />
+          <label htmlFor="fileInput" className="btn btn-secondary">
+            Send
+          </label>
           <Button variant="secondary" onClick={logout}>
             Logout
           </Button>
