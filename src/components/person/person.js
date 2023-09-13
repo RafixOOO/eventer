@@ -45,7 +45,7 @@ function Example() {
       })
       .catch(error => {
         console.log(error);
-        sessionStorage.removeItem("authdata")
+        sessionStorage.remove("authdata")
       });
   }, []);
 
@@ -66,7 +66,7 @@ function Example() {
         <Modal.Body>
           <center>
             <Col xs={6} md={4}>
-              <Image style={{ objectFit: 'scale-down', maxHeight: '180px', maxWidth: '171px' }} src={require('./img/img2.jpg')} roundedCircle />
+              <Image style={{ objectFit: 'contain', maxHeight: '180px', maxWidth: '171px' }} src={require('./img/img2.jpg')} roundedCircle />
             </Col>
             <br />
             <div style={{ fontSize: '150%' }}>
