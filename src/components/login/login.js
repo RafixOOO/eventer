@@ -13,10 +13,7 @@ function Example() {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const logout = () => {
-    sessionStorage.removeItem('authdata');
-    window.location.reload();
-  };
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     if (name === 'email') {
@@ -40,6 +37,7 @@ function Example() {
         if (responseData.jwtToken) {
           sessionStorage.setItem('authdata', responseData.jwtToken);
           setEmail(responseData.username);
+          sessionStorage.setItem("email", responseData.username);
           handleClose();
           window.location.reload();
         } else {
@@ -103,9 +101,6 @@ function Example() {
           </Button>
           <Button variant="secondary" onClick={handleClose}>
             Forgot password
-          </Button>
-          <Button variant="secondary" onClick={logout}>
-            Logout
           </Button>
         </Modal.Footer>
       </Modal>

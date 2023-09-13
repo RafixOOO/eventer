@@ -5,6 +5,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import { useState } from 'react';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import Login from '../login/login';
+import Person from '../person/person';
 import Badge from 'react-bootstrap/Badge';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Image from 'react-bootstrap/Image';
@@ -53,7 +54,12 @@ function Navigation() {
               </Nav>
               <Navbar.Collapse className="justify-content-end">
               <Navbar.Text>
-          <Login />
+              {sessionStorage.getItem('authdata') ?  (
+                  <Person />
+              ):(
+                <Login />
+              )}
+          
           </Navbar.Text>
         </Navbar.Collapse>
             </Navbar.Collapse>
