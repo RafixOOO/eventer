@@ -11,8 +11,8 @@ function Example() {
   const [imie, setImie] = useState('');
   const [nazwisko, setNazwisko] = useState('');
   const [id, setId] = useState('');
-  const [image, setImage]= useState('');
-  const [obraze, setObrazek]= useState('');
+  const [image, setImage] = useState('');
+  const [obraze, setObrazek] = useState('');
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -77,6 +77,7 @@ function Example() {
           const blob = new Blob([response.data], { type: 'image/jpeg' });
           const imageUrl = URL.createObjectURL(blob);
           setObrazek(imageUrl);
+          setImage("");
         })
         .catch((error) => {
           console.error(error);
@@ -84,6 +85,65 @@ function Example() {
         });
     }
   }, [image]);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    if (name === 'imie') {
+      setImie(value);
+    } else if (name === 'nazwisko') {
+      setNazwisko(value);
+    }
+  };
+
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+    setImage(file);
+  };
+
+  const handleButtonClick = () => {
+    if (image) {
+
+      const formData = new FormData();
+        formData.append('id', id); // Dodaj parametr "id"
+        formData.append('file', Image);
+
+      axios
+          .post(`http://localhost:8080/api/Image/PersonImage`,FormData,
+            {
+              headers: {
+                'Content-Type': 'multipart/form-data',
+                Authorization: `Bearer ${sessionStorage.getItem('authdata')}`,
+              },
+            })
+          .catch((error) => {
+            console.error(error);
+            sessionStorage.removeItem('authdata');
+          });
+
+          setImage("");
+    }
+
+        // Wywołaj pobieranie danych użytkownika po zalogowaniu
+
+        axios
+          .put(`http://localhost:8080/api/Persons/Edit`, {
+            id: id,
+            imie: imie,
+            nazwisko: nazwisko
+          },
+            {
+              headers: {
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${sessionStorage.getItem('authdata')}`,
+              },
+            })
+          .catch((error) => {
+            console.error(error);
+            sessionStorage.removeItem('authdata');
+          });
+          window.location.reload();
+    
+  };
 
   return (
     <>
@@ -100,21 +160,47 @@ function Example() {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
+
           <center>
-            <Col xs={6} md={4}>
-              <Image style={{ objectFit: 'contain', maxHeight: '180px', maxWidth: '171px' }} src={obraze} roundedCircle />
-            </Col>
-            <br />
-            <div style={{ fontSize: '150%' }}>
-              {imie} {nazwisko}
-            </div>
+            <form>
+              <Col xs={6} md={4}>
+                <label htmlFor="fileInput" className="custom-file-upload">
+                  <Image style={{ objectFit: 'contain', maxHeight: '180px', maxWidth: '171px' }} src={obraze} roundedCircle />
+                </label>
+              </Col>
+              <input
+                type="file"
+                id="fileInput"
+                accept="image/jpeg, .jpg"
+                className="form-control-file"
+                hidden
+                onChange={handleImageChange}
+              />
+              <br />
+
+              <input
+                type="text"
+                id="imie"
+                name="imie"
+                placeholder={imie}
+                onChange={handleInputChange}
+              />
+              <input
+                type="text"
+                id="nazwisko"
+                name="nazwisko"
+                placeholder={nazwisko}
+                onChange={handleInputChange}
+              />
+
+              <br /><br />
+              <button className="btn btn-secondary" onClick={handleButtonClick}>
+                Change
+              </button>
+            </form>
           </center>
         </Modal.Body>
         <Modal.Footer>
-          <input type="file" id="fileInput" accept="image/jpeg, .jpg" style={{ display: 'none' }} />
-          <label htmlFor="fileInput" className="btn btn-secondary">
-            Send
-          </label>
           <Button variant="secondary" onClick={logout}>
             Logout
           </Button>
