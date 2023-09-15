@@ -1,5 +1,4 @@
-import { useState } from 'react';
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
@@ -12,6 +11,8 @@ function Example() {
   const [imie, setImie] = useState('');
   const [nazwisko, setNazwisko] = useState('');
   const [id, setId] = useState('');
+  const [image, setImage]= useState('');
+  const [obraze, setObrazek]= useState('');
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -20,41 +21,76 @@ function Example() {
     window.location.reload();
   };
 
-  const handleFileChange = (event) => {
-    const selectedFile = event.target.files[0];
-    if (selectedFile) {
-      const newFileName = {id}+'.jpg'; // Tutaj możesz wprowadzić własną nazwę
-
-  }
-    
-  };
-
   useEffect(() => {
     // Wywołaj pobieranie danych użytkownika po zalogowaniu
     axios.get('http://localhost:8080/api/User/Current', {
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${sessionStorage.getItem("authdata")}`
-      }
+        Authorization: `Bearer ${sessionStorage.getItem('authdata')}`,
+      },
     })
       .then(response => {
         const responseData = response.data;
-        setImie(responseData.imie);
-        setNazwisko(responseData.nazwisko);
         setId(responseData.id);
       })
       .catch(error => {
-        console.log(error);
-        sessionStorage.remove("authdata")
+        console.error(error);
+        sessionStorage.removeItem('authdata');
       });
-  }, []);
+  }, []); // Pusty tablicowy zależności oznacza, że efekt wywoła się tylko raz przy montowaniu komponentu
+
+  useEffect(() => {
+    // Wywołaj pobieranie danych użytkownika po zalogowaniu
+    if (id) {
+      axios
+        .get(`http://localhost:8080/api/Persons/findOne?id=${id}`, {
+          headers: {
+            Authorization: `Bearer ${sessionStorage.getItem('authdata')}`,
+          },
+        })
+        .then((response) => {
+          const responseData = response.data;
+          setImie(responseData.imie);
+          setNazwisko(responseData.nazwisko);
+          setImage(responseData.image);
+        })
+        .catch((error) => {
+          console.error(error);
+          sessionStorage.removeItem('authdata');
+        });
+    }
+  }, [id]); // Zależność od zmiennej id - efekt wywoła się, gdy id zostanie zmienione
+
+  useEffect(() => {
+    // Wywołaj pobieranie obrazka użytkownika po zalogowaniu
+    if (image) {
+      axios
+        .get(`http://localhost:8080/api/Image/download/${image}`, {
+          headers: {
+            Accept: 'application/octet-stream',
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${sessionStorage.getItem('authdata')}`,
+          },
+          responseType: 'blob', // Ustaw typ odpowiedzi na 'blob' (dla obrazka)
+        })
+        .then((response) => {
+          const blob = new Blob([response.data], { type: 'image/jpeg' });
+          const imageUrl = URL.createObjectURL(blob);
+          setObrazek(imageUrl);
+        })
+        .catch((error) => {
+          console.error(error);
+          sessionStorage.removeItem('authdata');
+        });
+    }
+  }, [image]);
 
   return (
     <>
       <a href="#Person" onClick={handleShow}>
 
         <div>
-          {imie} {nazwisko} {id}
+          {imie} {nazwisko}
         </div>
       </a>
 
@@ -66,7 +102,7 @@ function Example() {
         <Modal.Body>
           <center>
             <Col xs={6} md={4}>
-              <Image style={{ objectFit: 'contain', maxHeight: '180px', maxWidth: '171px' }} src={require('./img/img2.jpg')} roundedCircle />
+              <Image style={{ objectFit: 'contain', maxHeight: '180px', maxWidth: '171px' }} src={obraze} roundedCircle />
             </Col>
             <br />
             <div style={{ fontSize: '150%' }}>
@@ -75,7 +111,7 @@ function Example() {
           </center>
         </Modal.Body>
         <Modal.Footer>
-          <input type="file" onChange={handleFileChange} id="fileInput" accept="image/jpeg, .jpg" style={{ display: 'none' }} />
+          <input type="file" id="fileInput" accept="image/jpeg, .jpg" style={{ display: 'none' }} />
           <label htmlFor="fileInput" className="btn btn-secondary">
             Send
           </label>
