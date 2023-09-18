@@ -86,65 +86,30 @@ function Example() {
     }
   }, [image]);
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    if (name === 'imie') {
-      setImie(value);
-    } else if (name === 'nazwisko') {
-      setNazwisko(value);
-    }
-  };
-
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    setImage(file);
-  };
-
   const handleButtonClick = () => {
-    if (image) {
-
-      const formData = new FormData();
-        formData.append('id', id); // Dodaj parametr "id"
-        formData.append('file', Image);
-
-      axios
-          .post(`http://localhost:8080/api/Image/PersonImage`,FormData,
-            {
-              headers: {
-                'Content-Type': 'multipart/form-data',
-                Authorization: `Bearer ${sessionStorage.getItem('authdata')}`,
-              },
-            })
-          .catch((error) => {
-            console.error(error);
-            sessionStorage.removeItem('authdata');
-          });
-
-          setImage("");
-    }
-
-        // Wywołaj pobieranie danych użytkownika po zalogowaniu
 
         axios
           .put(`http://localhost:8080/api/Persons/Edit`, {
             id: id,
             imie: imie,
-            nazwisko: nazwisko
+            nazwisko: nazwisko,
+            emailconfirm: 1,
+            image: "null",
           },
             {
               headers: {
                 'Content-Type': 'application/json',
                 Authorization: `Bearer ${sessionStorage.getItem('authdata')}`,
               },
+            }).then((response) => {
+              console.logo(response.data);
+              other();
             })
           .catch((error) => {
             console.error(error);
             sessionStorage.removeItem('authdata');
           });
-          window.location.reload();
-    
-  };
-
+  }
   return (
     <>
       <a href="#Person" onClick={handleShow}>
@@ -174,7 +139,6 @@ function Example() {
                 accept="image/jpeg, .jpg"
                 className="form-control-file"
                 hidden
-                onChange={handleImageChange}
               />
               <br />
 
@@ -183,14 +147,12 @@ function Example() {
                 id="imie"
                 name="imie"
                 placeholder={imie}
-                onChange={handleInputChange}
               />
               <input
                 type="text"
                 id="nazwisko"
                 name="nazwisko"
                 placeholder={nazwisko}
-                onChange={handleInputChange}
               />
 
               <br /><br />
