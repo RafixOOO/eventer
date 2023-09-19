@@ -3,7 +3,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import axios from 'axios';
-import Col from 'react-bootstrap/Col';
 import Image from 'react-bootstrap/Image';
 
 function Example() {
@@ -85,31 +84,6 @@ function Example() {
         });
     }
   }, [image]);
-
-  const handleButtonClick = () => {
-
-        axios
-          .put(`http://localhost:8080/api/Persons/Edit`, {
-            id: id,
-            imie: imie,
-            nazwisko: nazwisko,
-            emailconfirm: 1,
-            image: "null",
-          },
-            {
-              headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${sessionStorage.getItem('authdata')}`,
-              },
-            }).then((response) => {
-              console.logo(response.data);
-              other();
-            })
-          .catch((error) => {
-            console.error(error);
-            sessionStorage.removeItem('authdata');
-          });
-  }
   return (
     <>
       <a href="#Person" onClick={handleShow}>
@@ -127,42 +101,18 @@ function Example() {
         <Modal.Body>
 
           <center>
-            <form>
-              <Col xs={6} md={4}>
-                <label htmlFor="fileInput" className="custom-file-upload">
+            
                   <Image style={{ objectFit: 'contain', maxHeight: '180px', maxWidth: '171px' }} src={obraze} roundedCircle />
-                </label>
-              </Col>
-              <input
-                type="file"
-                id="fileInput"
-                accept="image/jpeg, .jpg"
-                className="form-control-file"
-                hidden
-              />
-              <br />
-
-              <input
-                type="text"
-                id="imie"
-                name="imie"
-                placeholder={imie}
-              />
-              <input
-                type="text"
-                id="nazwisko"
-                name="nazwisko"
-                placeholder={nazwisko}
-              />
-
-              <br /><br />
-              <button className="btn btn-secondary" onClick={handleButtonClick}>
-                Change
-              </button>
-            </form>
+                  <br /><br />
+                  <div style={{ fontSize: '150%' }}>
+                  {imie} {nazwisko}
+                  </div>
           </center>
         </Modal.Body>
         <Modal.Footer>
+        <Button variant="secondary">
+            Change
+          </Button>
           <Button variant="secondary" onClick={logout}>
             Logout
           </Button>
