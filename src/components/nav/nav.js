@@ -24,7 +24,7 @@ function Navigation() {
         <>
         <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary" bg="dark" data-bs-theme="dark">
           <Container fluid>
-          <Navbar.Brand>Eventer</Navbar.Brand>
+          <Navbar.Brand>Eventer <sup>1.0</sup></Navbar.Brand>
 
             <Navbar.Toggle aria-controls="navbarScroll" />
             <Navbar.Collapse id="navbarScroll">
