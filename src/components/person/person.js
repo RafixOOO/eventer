@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import axios from 'axios';
 import Image from 'react-bootstrap/Image';
+import PersonChange from './personChange';
 
 function Example() {
   const [show, setShow] = useState(false);
@@ -110,9 +111,7 @@ function Example() {
           </center>
         </Modal.Body>
         <Modal.Footer>
-        <Button variant="secondary">
-            Change
-          </Button>
+        <PersonChange />
           <Button variant="secondary" onClick={logout}>
             Logout
           </Button>
