@@ -54,7 +54,7 @@ function Example() {
     console.log('Obrazek:', obraze);
     console.log('id:', id);
     if(obraze){
-
+      image();
     }
     edit();
     window.location.reload();
@@ -72,13 +72,37 @@ function Example() {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${sessionStorage.getItem('authdata')}`,
           },
-          timeout: 0,
+          timeout: 5000,
         })
         .then(response => {
           console.log(response.data)
         })
       .catch((error) => {
-        console.error(error);
+        console.log(error);
+        sessionStorage.removeItem('authdata');
+      });
+
+  }
+
+  const image = () => {
+
+    const formData = new FormData();
+    formData.append('id', id);
+    formData.append('file', obraze);
+
+    axios
+      .post(`http://localhost:8080/api/Image/PersonImage`, formData,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+            Authorization: `Bearer ${sessionStorage.getItem('authdata')}`,
+          },
+        })
+        .then(response => {
+          console.log(response.data)
+        })
+      .catch((error) => {
+        console.log(error);
         sessionStorage.removeItem('authdata');
       });
 
