@@ -53,7 +53,7 @@ function Example() {
     console.log('Nazwisko:', nazwisko);
     console.log('Obrazek:', obraze);
     console.log('id:', id);
-    if(obraze){
+    if (obraze) {
       image();
     }
     edit();
@@ -74,9 +74,9 @@ function Example() {
           },
           timeout: 5000,
         })
-        .then(response => {
-          console.log(response.data)
-        })
+      .then(response => {
+        console.log(response.data)
+      })
       .catch((error) => {
         console.log(error);
         sessionStorage.removeItem('authdata');
@@ -98,9 +98,9 @@ function Example() {
             Authorization: `Bearer ${sessionStorage.getItem('authdata')}`,
           },
         })
-        .then(response => {
-          console.log(response.data)
-        })
+      .then(response => {
+        console.log(response.data)
+      })
       .catch((error) => {
         console.log(error);
         sessionStorage.removeItem('authdata');
@@ -155,7 +155,7 @@ function Example() {
               <button type="button" onClick={handleSubmit} className="btn btn-secondary">
                 Change
               </button>
-              </form>
+            </form>
           </center>
         </Modal.Body>
       </Modal>
