@@ -102,16 +102,16 @@ function Example() {
         <Modal.Body>
 
           <center>
-            
-                  <Image style={{ objectFit: 'contain', maxHeight: '180px', maxWidth: '171px' }} src={obraze} roundedCircle />
-                  <br /><br />
-                  <div style={{ fontSize: '150%' }}>
-                  {imie} {nazwisko}
-                  </div>
+
+            <Image style={{ objectFit: 'contain', maxHeight: '180px', maxWidth: '171px' }} src={obraze} roundedCircle />
+            <br /><br />
+            <div style={{ fontSize: '150%' }}>
+              {imie} {nazwisko}
+            </div>
           </center>
         </Modal.Body>
         <Modal.Footer>
-        <PersonChange />
+          <PersonChange />
           <Button variant="secondary" onClick={logout}>
             Logout
           </Button>
