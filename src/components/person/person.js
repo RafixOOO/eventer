@@ -111,6 +111,9 @@ function Example() {
           </center>
         </Modal.Body>
         <Modal.Footer>
+        <Button variant="danger" onClick={handleClose}>
+            Delete
+          </Button>
           <PersonChange />
           <Button variant="secondary" onClick={logout}>
             Logout
