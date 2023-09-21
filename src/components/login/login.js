@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import axios from 'axios';
+import Changepassword from './changepassword';
 
 function Example() {
   const [show, setShow] = useState(false);
@@ -100,9 +101,7 @@ function Example() {
           <Button variant="secondary" onClick={handleClose}>
             Register
           </Button>
-          <Button variant="secondary" onClick={handleClose}>
-            Forgot password
-          </Button>
+          <Changepassword />
         </Modal.Footer>
       </Modal>
     </>

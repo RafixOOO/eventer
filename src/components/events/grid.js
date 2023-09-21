@@ -52,6 +52,14 @@ longer.`;
                 )}
               </Card.Text>
             </Card.Body>
+            <Card.Footer style={{ textAlign: 'center' }}>
+            <button className="btn btn-secondary">
+            Show Comments
+          </button>
+          <button className="btn btn-secondary">
+            Add to Callendar
+          </button>
+            </Card.Footer>
           </Card>
         </Col>
       ))}
@@ -64,14 +72,6 @@ longer.`;
         <Card.Img variant="top" style={{ objectFit: 'scale-down', maxHeight: '400px'}} src={require('./img/img3.jpg')} className='img-fluid' />
         <Linkify>{text}</Linkify>
         </Modal.Body>
-        <Modal.Footer>
-        <button className="btn btn-secondary" onClick={handleCloseModal}>
-            Comments
-          </button>
-          <button className="btn btn-secondary" onClick={handleCloseModal}>
-            Add to Callendar
-          </button>
-        </Modal.Footer>
       </Modal>
     </Row>
   );
