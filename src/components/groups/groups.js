@@ -2,7 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Badge from 'react-bootstrap/Badge';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Image from 'react-bootstrap/Image';
-import Logo from '../nav/logo.svg';
+import Logo from './logo.svg';
 import Nav from 'react-bootstrap/Nav';
 
 function DefaultExample() {
