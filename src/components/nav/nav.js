@@ -6,10 +6,8 @@ import { useState } from 'react';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import Login from '../login/login';
 import Person from '../person/person';
-import Badge from 'react-bootstrap/Badge';
-import ListGroup from 'react-bootstrap/ListGroup';
-import Image from 'react-bootstrap/Image';
-import Logo from './logo.svg';
+import Groups from '../groups/groups';
+
 
 const options = [
   {
@@ -92,53 +90,9 @@ function OffCanvasExample({ name, ...props }) {
           <Offcanvas.Title>Groups</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
-          <DefaultExample />
+          <Groups />
         </Offcanvas.Body>
       </Offcanvas>
     </>
-  );
-}
-
-
-function DefaultExample() {
-  return (
-    <ListGroup as="ol">
-      <ListGroup.Item
-        as="li"
-        className="d-flex justify-content-between align-items-start"
-      >
-        <Image style={{maxWidth: '100%',height: 'auto', maxHeight: '25px',}} src={Logo}  roundedCircle />
-        <div className="ms-2 me-auto">
-        <div className="fw-bold"><Nav.Link href="#group">Subheading</Nav.Link></div>
-        </div>
-        <Badge bg="danger" pill>
-          14
-        </Badge>
-      </ListGroup.Item>
-      <ListGroup.Item
-        as="li"
-        className="d-flex justify-content-between align-items-start"
-      >
-        <Image style={{maxWidth: '100%',height: 'auto', maxHeight: '25px',}} src={Logo}  roundedCircle />
-        <div className="ms-2 me-auto">
-        <div style={{maxWidth: '100%'}} className="fw-bold"><Nav.Link href="#group">Subheading</Nav.Link></div>
-        </div>
-        <Badge bg="danger" pill>
-          14
-        </Badge>
-      </ListGroup.Item>
-      <ListGroup.Item
-        as="li"
-        className="d-flex justify-content-between align-items-start"
-      >
-          <Image style={{maxWidth: '100%',height: 'auto', maxHeight: '25px',}} src={Logo}  roundedCircle />
-        <div className="ms-2 me-auto">
-          <div className="fw-bold"><Nav.Link href="#group">Subheading</Nav.Link></div>
-        </div>
-        <Badge bg="danger" pill>
-          1
-        </Badge>
-      </ListGroup.Item>
-    </ListGroup>
   );
 }

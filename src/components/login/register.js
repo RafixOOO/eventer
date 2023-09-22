@@ -18,8 +18,8 @@ function Example() {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-    const handleSubmit = (e) => {
-        sendCode();
+    const handleSubmit = () => {
+        check();
     };
 
     const handleFileChange = (e) => {
@@ -44,7 +44,7 @@ function Example() {
 
     const handleSubmit1 = (a) => {
         if (parseInt(Code, 10) === parseInt(CodeCheck,10)) {
-            check();
+            change();
         } else {
             setText1(true);
         }
@@ -65,7 +65,7 @@ function Example() {
                 })
             .then(response => {
                 setId(response.data.id);
-                change();
+                sendCode();
                 
             })
             .catch((error) => {
@@ -104,7 +104,7 @@ function Example() {
                         'Content-Type': 'application/json',
                     },
                 }, )
-            .then(response => {
+            .then(() => {
                 window.location.reload();
             })
             .catch((error) => {
