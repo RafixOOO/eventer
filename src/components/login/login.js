@@ -39,7 +39,6 @@ function Example() {
         if (responseData.jwtToken) {
           sessionStorage.setItem('authdata', responseData.jwtToken);
           setEmail(responseData.username);
-          sessionStorage.setItem("email", responseData.username);
           handleClose();
           window.location.reload();
         } else {
