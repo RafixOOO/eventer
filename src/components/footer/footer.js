@@ -4,13 +4,13 @@ import './footer.css';
 const Footer = () => {
     return (
         <>
-        
-        <br />
-        <div className={'wrapper'}>
-            <div className={'content'}>
-                Rafał Pezda © 2023. All Rights Reserved.
+
+            <br />
+            <div className={'wrapper'}>
+                <div className={'content'}>
+                    Rafał Pezda © 2023. All Rights Reserved.
+                </div>
             </div>
-        </div>
         </>
     );
 };

@@ -18,55 +18,55 @@ const options = [
 ];
 
 function Navigation() {
-    return (
-        <>
-        <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary" bg="dark" data-bs-theme="dark">
-          <Container fluid>
+  return (
+    <>
+      <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary" bg="dark" data-bs-theme="dark">
+        <Container fluid>
           <Navbar.Brand>Eventer <sup>1.0</sup></Navbar.Brand>
 
-            <Navbar.Toggle aria-controls="navbarScroll" />
-            <Navbar.Collapse id="navbarScroll">
-              <Nav
-                className="me-auto my-2 my-lg-0"
-                style={{ maxHeight: '100px' }}
-                navbarScroll
-              >
-                 {sessionStorage.getItem('authdata') ?  (
-                  <div>
-                    {options.map((props, idx) => (
-                      <OffCanvasExample key={idx} {...props} />
-                    ))}
-                    </div>
-                  ):(
-                  <div></div>
-                )}
-                <Nav.Link href="/">Events</Nav.Link>
-                
-                {sessionStorage.getItem('authdata') ? (
-                  <Nav.Link href="/callendar">Callendar</Nav.Link>
-                ):(
-                  <div></div>
-                )}
-                <Nav.Link href="/contact">Contact</Nav.Link>
-                
-              </Nav>
-              <Navbar.Collapse className="justify-content-end">
-              <Navbar.Text>
-              {sessionStorage.getItem('authdata') ?  (
-                  <Person />
-              ):(
-                <Login />
+          <Navbar.Toggle aria-controls="navbarScroll" />
+          <Navbar.Collapse id="navbarScroll">
+            <Nav
+              className="me-auto my-2 my-lg-0"
+              style={{ maxHeight: '100px' }}
+              navbarScroll
+            >
+              {sessionStorage.getItem('authdata') ? (
+                <div>
+                  {options.map((props, idx) => (
+                    <OffCanvasExample key={idx} {...props} />
+                  ))}
+                </div>
+              ) : (
+                <div></div>
               )}
-          
-          </Navbar.Text>
-        </Navbar.Collapse>
+              <Nav.Link href="/">Events</Nav.Link>
+
+              {sessionStorage.getItem('authdata') ? (
+                <Nav.Link href="/callendar">Callendar</Nav.Link>
+              ) : (
+                <div></div>
+              )}
+              <Nav.Link href="/contact">Contact</Nav.Link>
+
+            </Nav>
+            <Navbar.Collapse className="justify-content-end">
+              <Navbar.Text>
+                {sessionStorage.getItem('authdata') ? (
+                  <Person />
+                ) : (
+                  <Login />
+                )}
+
+              </Navbar.Text>
             </Navbar.Collapse>
-          </Container>
-        </Navbar>
-        
-        <br />
-        </>
-      );
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
+
+      <br />
+    </>
+  );
 }
 export default Navigation;
 

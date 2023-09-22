@@ -35,7 +35,7 @@ function Example() {
     };
 
     const handleSubmit1 = (a) => {
-        if (parseInt(Code, 10) === parseInt(CodeCheck,10)) {
+        if (parseInt(Code, 10) === parseInt(CodeCheck, 10)) {
             change();
         } else {
             setText1(true);
@@ -82,7 +82,7 @@ function Example() {
 
     const change = () => {
         axios
-            .put(`http://localhost:8080/auth/EditUser`,{
+            .put(`http://localhost:8080/auth/EditUser`, {
                 id: id,
                 password: password,
             },
@@ -91,7 +91,7 @@ function Example() {
                         'Content-Type': 'application/json',
                     },
                     timeout: 5000,
-                }, )
+                },)
             .then(response => {
                 window.location.reload();
             })

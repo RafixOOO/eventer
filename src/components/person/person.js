@@ -23,52 +23,52 @@ function Example() {
 
   const deleteperson = () => {
     axios
-        .delete(`http://localhost:8080/api/User/Delete/${id}`,
-            {
-                headers: {
-                  'Content-Type': 'application/json',
-                  Authorization: `Bearer ${sessionStorage.getItem('authdata')}`,
-                },
-            })
-        .then(() => {
-          sessionStorage.removeItem('authdata');
-          window.location.reload();
-            
+      .delete(`http://localhost:8080/api/User/Delete/${id}`,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${sessionStorage.getItem('authdata')}`,
+          },
         })
-        .catch((error) => {
-            console.log(error);
-            sessionStorage.removeItem('authdata');
-        });
-
-}
-
-const deleteperson1 = () => {
-  axios
-      .put(`http://localhost:8080/api/Persons/Edit`,
-      {
-        id: id,
-        imie: "Deleted",
-        nazwisko: "User",
-        emailconfirm: 0,
-        image: "58b6edb8-8503-4e13-9773-1b63803e0ca1_s.jpg",
-      },
-          {
-              headers: {
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${sessionStorage.getItem('authdata')}`,
-              },
-              timeout: 5000,
-          })
       .then(() => {
-        deleteperson();
-          
+        sessionStorage.removeItem('authdata');
+        window.location.reload();
+
       })
       .catch((error) => {
-          console.log(error);
-          sessionStorage.removeItem('authdata');
+        console.log(error);
+        sessionStorage.removeItem('authdata');
       });
 
-}
+  }
+
+  const deleteperson1 = () => {
+    axios
+      .put(`http://localhost:8080/api/Persons/Edit`,
+        {
+          id: id,
+          imie: "Deleted",
+          nazwisko: "User",
+          emailconfirm: 0,
+          image: "58b6edb8-8503-4e13-9773-1b63803e0ca1_s.jpg",
+        },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${sessionStorage.getItem('authdata')}`,
+          },
+          timeout: 5000,
+        })
+      .then(() => {
+        deleteperson();
+
+      })
+      .catch((error) => {
+        console.log(error);
+        sessionStorage.removeItem('authdata');
+      });
+
+  }
 
   useEffect(() => {
     // Wywołaj pobieranie danych użytkownika po zalogowaniu
@@ -160,7 +160,7 @@ const deleteperson1 = () => {
           </center>
         </Modal.Body>
         <Modal.Footer>
-        <Button variant="danger" onClick={deleteperson1}>
+          <Button variant="danger" onClick={deleteperson1}>
             Delete
           </Button>
           <PersonChange />

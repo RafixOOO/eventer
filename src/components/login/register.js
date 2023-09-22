@@ -43,7 +43,7 @@ function Example() {
     };
 
     const handleSubmit1 = (a) => {
-        if (parseInt(Code, 10) === parseInt(CodeCheck,10)) {
+        if (parseInt(Code, 10) === parseInt(CodeCheck, 10)) {
             change();
         } else {
             setText1(true);
@@ -53,7 +53,7 @@ function Example() {
 
     const check = () => {
         axios
-            .post(`http://localhost:8080/auth/AddPerson`,{
+            .post(`http://localhost:8080/auth/AddPerson`, {
                 imie: imie,
                 nazwisko: nazwisko,
                 emailconfirm: 1,
@@ -66,7 +66,7 @@ function Example() {
             .then(response => {
                 setId(response.data.id);
                 sendCode();
-                
+
             })
             .catch((error) => {
                 console.log(error);
@@ -94,7 +94,7 @@ function Example() {
 
     const change = () => {
         axios
-            .post(`http://localhost:8080/auth/AddUser`,{
+            .post(`http://localhost:8080/auth/AddUser`, {
                 id: id,
                 email: email,
                 password: password,
@@ -103,7 +103,7 @@ function Example() {
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                }, )
+                },)
             .then(() => {
                 window.location.reload();
             })
