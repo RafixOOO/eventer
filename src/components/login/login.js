@@ -5,6 +5,7 @@ import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import axios from 'axios';
 import Changepassword from './changepassword';
+import Register from './register';
 
 function Example() {
   const [show, setShow] = useState(false);
@@ -98,9 +99,7 @@ function Example() {
           {error && <p className="text-danger">{error}</p>}
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Register
-          </Button>
+          <Register />
           <Changepassword />
         </Modal.Footer>
       </Modal>
