@@ -14,7 +14,7 @@ function DefaultExample() {
             >
                 <Image style={{ maxWidth: '100%', height: 'auto', maxHeight: '25px', }} src={Logo} roundedCircle />
                 <div className="ms-2 me-auto">
-                    <div className="fw-bold"><Nav.Link href="#group">Subheading</Nav.Link></div>
+                    <div className="fw-bold"><Nav.Link href="/groups">Subheading</Nav.Link></div>
                 </div>
                 <Badge bg="danger" pill>
                     14
@@ -26,7 +26,7 @@ function DefaultExample() {
             >
                 <Image style={{ maxWidth: '100%', height: 'auto', maxHeight: '25px', }} src={Logo} roundedCircle />
                 <div className="ms-2 me-auto">
-                    <div style={{ maxWidth: '100%' }} className="fw-bold"><Nav.Link href="#group">Subheading</Nav.Link></div>
+                    <div style={{ maxWidth: '100%' }} className="fw-bold"><Nav.Link href="/groups">Subheading</Nav.Link></div>
                 </div>
                 <Badge bg="danger" pill>
                     14
@@ -38,7 +38,7 @@ function DefaultExample() {
             >
                 <Image style={{ maxWidth: '100%', height: 'auto', maxHeight: '25px', }} src={Logo} roundedCircle />
                 <div className="ms-2 me-auto">
-                    <div className="fw-bold"><Nav.Link href="#group">Subheading</Nav.Link></div>
+                    <div className="fw-bold"><Nav.Link href="/groups">Subheading</Nav.Link></div>
                 </div>
                 <Badge bg="danger" pill>
                     1

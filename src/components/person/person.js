@@ -21,7 +21,7 @@ function Example() {
     window.location.reload();
   };
 
-  const deleteperson = () => {
+  const dp = () => {
     axios
       .delete(`http://localhost:8080/api/User/Delete/${id}`,
         {
@@ -42,7 +42,7 @@ function Example() {
 
   }
 
-  const deleteperson1 = () => {
+  const nonperson = () => {
     axios
       .put(`http://localhost:8080/api/Persons/Edit`,
         {
@@ -60,7 +60,7 @@ function Example() {
           timeout: 5000,
         })
       .then(() => {
-        deleteperson();
+        dp();
 
       })
       .catch((error) => {
@@ -160,7 +160,7 @@ function Example() {
           </center>
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="danger" onClick={deleteperson1}>
+          <Button variant="danger" onClick={nonperson}>
             Delete
           </Button>
           <PersonChange />
