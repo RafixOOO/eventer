@@ -97,7 +97,7 @@ function OffCanvasExample({ name, ...props }) {
           </Dropdown.Toggle>
 
           <Dropdown.Menu>
-            <Dropdown.Item>Your Groups</Dropdown.Item>
+            <Dropdown.Item>Groups</Dropdown.Item>
             <Dropdown.Item>Create</Dropdown.Item>
             <Dropdown.Item>Find</Dropdown.Item>
           </Dropdown.Menu>
