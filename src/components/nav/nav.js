@@ -7,6 +7,7 @@ import Offcanvas from 'react-bootstrap/Offcanvas';
 import Login from '../login/login';
 import Person from '../person/person';
 import Groups from '../groups/groups';
+import Dropdown from 'react-bootstrap/Dropdown';
 
 
 const options = [
@@ -89,6 +90,19 @@ function OffCanvasExample({ name, ...props }) {
         <Offcanvas.Header closeButton>
           <Offcanvas.Title>Groups</Offcanvas.Title>
         </Offcanvas.Header>
+        <div className="d-flex justify-content-center">
+        <Dropdown>
+          <Dropdown.Toggle variant="secondary" id="dropdown-basic">
+            Groups action
+          </Dropdown.Toggle>
+
+          <Dropdown.Menu>
+            <Dropdown.Item>Your Groups</Dropdown.Item>
+            <Dropdown.Item>Create</Dropdown.Item>
+            <Dropdown.Item>Find</Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
+      </div>
         <Offcanvas.Body>
           <Groups />
         </Offcanvas.Body>

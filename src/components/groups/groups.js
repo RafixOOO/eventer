@@ -7,6 +7,7 @@ import Nav from 'react-bootstrap/Nav';
 
 function DefaultExample() {
     return (
+        <>
         <ListGroup as="ol">
             <ListGroup.Item
                 as="li"
@@ -45,7 +46,9 @@ function DefaultExample() {
                 </Badge>
             </ListGroup.Item>
         </ListGroup>
+        </>
     );
+    
 }
 
 export default DefaultExample;
