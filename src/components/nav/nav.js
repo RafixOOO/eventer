@@ -7,6 +7,8 @@ import Offcanvas from 'react-bootstrap/Offcanvas';
 import Login from '../login/login';
 import Person from '../person/person';
 import Groups from '../groups/groups';
+import Create from '../groups/creategroup';
+import Find from '../groups/findgroup';
 import Dropdown from 'react-bootstrap/Dropdown';
 
 
@@ -81,6 +83,30 @@ function OffCanvasExample({ name, ...props }) {
     maxWidth: '60%', // Ustaw szerokość na 10%
   };
 
+  const [showGroup, setGroup] = useState(true);
+  const [showCreate, setCreate] = useState(false);
+  const [showFind, setFind] = useState(false);
+
+        const groupshow = () => {
+          setGroup(true);
+          setCreate(false);
+          setFind(false);
+        };
+
+        const createshow = () => {
+          setGroup(false);
+          setCreate(true);
+          setFind(false);
+        };
+
+        const findshow = () => {
+          setGroup(false);
+          setCreate(false);
+          setFind(true);
+        };
+
+
+
   return (
     <>
       <Nav.Link onClick={toggleShow}>
@@ -97,14 +123,17 @@ function OffCanvasExample({ name, ...props }) {
           </Dropdown.Toggle>
 
           <Dropdown.Menu>
-            <Dropdown.Item>Groups</Dropdown.Item>
-            <Dropdown.Item>Create</Dropdown.Item>
-            <Dropdown.Item>Find</Dropdown.Item>
+            <Dropdown.Item onClick={groupshow}>Groups</Dropdown.Item>
+            <Dropdown.Item onClick={createshow}>Create</Dropdown.Item>
+            <Dropdown.Item onClick={findshow}>Find</Dropdown.Item>
           </Dropdown.Menu>
         </Dropdown>
       </div>
         <Offcanvas.Body>
-          <Groups />
+        {showGroup && <Groups />}
+        {showCreate && <Create />}
+        {showFind && <Find />}
+          
         </Offcanvas.Body>
       </Offcanvas>
     </>
