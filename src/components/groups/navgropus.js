@@ -27,7 +27,6 @@ function VerticalExample() {
     <>
     <ButtonGroup className="d-flex justify-content-center">
   <Button variant="dark" onClick={eventvisible}>Events</Button>
-  <Button variant="dark">Chat</Button>
   <Button variant="dark" onClick={usersvisible}>Users</Button>
   <DropdownButton variant="dark"
     as={ButtonGroup}
