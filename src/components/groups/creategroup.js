@@ -39,7 +39,6 @@ function TextControlsExample() {
         nazwa: name,
         opis: description,
         status: isPublic,
-        image: "58b6edb8-8503-4e13-9773-1b63803e0ca1_s.jpg",
       },
         {
           headers: {
@@ -89,7 +88,7 @@ function TextControlsExample() {
         userIdUser: User,
         chatWriter: true,
         confirm: true,
-        badges: 0
+        badges: 0,
       },
         {
           headers: {
