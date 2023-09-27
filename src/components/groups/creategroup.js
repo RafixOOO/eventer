@@ -96,13 +96,9 @@ function TextControlsExample() {
             Authorization: `Bearer ${sessionStorage.getItem('authdata')}`,
           },
         })
-      .then(() => {
-        window.location.reload();
-      })
       .catch((error) => {
         console.log(error);
         sessionStorage.removeItem('authdata');
-        window.location.reload();
       });
 
   }
