@@ -9,7 +9,7 @@ import axios from 'axios';
 function DefaultExample() {
     const [Email, setEmail] = useState('');
     const [data, setData] = useState([]);
-    const [image, setImage] = useState('');
+    const [imageUrls, setImageUrls] = useState({});
 
     useEffect(() => {
         // Wywołaj pobieranie danych użytkownika po zalogowaniu
@@ -47,26 +47,36 @@ function DefaultExample() {
             });
     }, [Email]);
 
-    const dowima = (obrazek) => {
-        axios.get(`http://localhost:8080/api/Image/download/${obrazek}`, {
-            headers: {
-                Accept: 'application/octet-stream',
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${sessionStorage.getItem('authdata')}`,
-            },
-            responseType: 'blob',
-        })
-            .then((response) => {
-                const blob = new Blob([response.data], { type: 'image/jpeg' });
-                setImage(URL.createObjectURL(blob));
-            })
-            .catch((error) => {
-                console.error(error);
-            });
-
-            return image;
-    }
-
+    useEffect(() => {
+        // Pobierz i zaktualizuj obrazy dla każdego elementu w danych
+        data.forEach(item => {
+            // Sprawdź, czy obraz został już pobrany
+            if (!imageUrls[item.koloIdKola.image]) {
+                axios.get(`http://localhost:8080/api/Image/download/${item.koloIdKola.image}`, {
+                    headers: {
+                        Accept: 'application/octet-stream',
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${sessionStorage.getItem('authdata')}`,
+                    },
+                    responseType: 'blob',
+                })
+                .then((response) => {
+                    const blob = new Blob([response.data], { type: 'image/jpeg' });
+                    const imageUrl = URL.createObjectURL(blob);
+                    
+                    // Aktualizuj stan z adresem URL obrazu
+                    setImageUrls(prevState => ({
+                        ...prevState,
+                        [item.koloIdKola.image]: imageUrl,
+                    }));
+                })
+                .catch((error) => {
+                    console.error(error);
+                    sessionStorage.removeItem('authdata');
+                });
+            }
+        });
+    }, [data, imageUrls]);
     return (
         <>
             <ListGroup as="ol">
@@ -80,7 +90,7 @@ function DefaultExample() {
                         
                         <Image
                             style={{ maxWidth: '100%', height: 'auto', maxHeight: '25px' }}
-                            src={dowima(item.koloIdKola.image)}
+                            src={imageUrls[item.koloIdKola.image]}
                             roundedCircle
                         />
                         <div className="ms-2 me-auto">
