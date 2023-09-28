@@ -69,7 +69,9 @@ function TextControlsExample() {
       .then(response => {
         const responseData = response.data;
         setUser(responseData);
-        connect();
+        setTimeout(() => {
+          connect();
+        }, 2000);
       })
       .catch(error => {
         console.error(error);
@@ -79,6 +81,7 @@ function TextControlsExample() {
   }
 
   const connect = () => {
+    if(User){
     axios
       .post(`http://localhost:8080/api/KoloUser/Add`, {
         eventsAdder: true,
@@ -100,6 +103,7 @@ function TextControlsExample() {
         console.log(error);
         sessionStorage.removeItem('authdata');
       });
+      }
 
   }
 

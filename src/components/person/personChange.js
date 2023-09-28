@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Modal from 'react-bootstrap/Modal';
 import axios from 'axios';
 import Button from 'react-bootstrap/Button';
+import Alert from 'react-bootstrap/Alert';
 
 function Example() {
   const [show, setShow] = useState(false);
@@ -10,6 +11,7 @@ function Example() {
   const [nazwisko, setNazwisko] = useState('');
   const [id, setId] = useState('');
   const [obraze, setObrazek] = useState('');
+  const [showAlert, setShowAlert] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -56,33 +58,40 @@ function Example() {
     if (obraze) {
       image();
     }
-    edit();
-    window.location.reload();
+    if(imie){
+      edit();
+    }
+    setShowAlert(true);
   };
 
   const edit = () => {
     axios
-      .put(`http://localhost:8080/api/Persons/Edit`, {
-        id: id,
-        imie: imie,
-        nazwisko: nazwisko,
-      },
+      .put(
+        `http://localhost:8080/api/Persons/Edit`,
+        {
+          id: id,
+          imie: imie,
+          nazwisko: nazwisko,
+          emailconfirm: 1,
+        },
         {
           headers: {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${sessionStorage.getItem('authdata')}`,
           },
-          timeout: 5000,
-        })
-      .then(response => {
-        console.log(response.data)
+          timeout: 5000
+        }
+      )
+      .then((response) => {
+        console.log('Edycja zakończona sukcesem', response.data);
+        // Tutaj możesz obsłużyć odpowiedź z serwera po udanej edycji
+        // Na przykład możesz wyświetlić komunikat o sukcesie lub podjąć inne działania w zależności od odpowiedzi
       })
       .catch((error) => {
-        console.log(error);
-        sessionStorage.removeItem('authdata');
+        console.error('Błąd podczas edycji', error);
+        // Obsłuż błąd, jeśli wystąpił
       });
-
-  }
+  };
 
   const image = () => {
 
@@ -107,7 +116,6 @@ function Example() {
       });
 
   }
-
   return (
     <>
       <Button variant="secondary" onClick={handleShow}>
@@ -118,6 +126,11 @@ function Example() {
       </Button>
 
       <Modal show={show} onHide={handleClose}>
+      {showAlert && (
+        <Alert style={{ position: 'absolute', top: '20px', right: '35px' }} className="alert alert-success" role="alert" onClose={() => setShowAlert(false)} dismissible>
+          Dane zostały zmienione!
+        </Alert>
+      )}
         <Modal.Header closeButton>
           <Modal.Title>Change Person
           </Modal.Title>
@@ -126,7 +139,6 @@ function Example() {
 
           <center>
 
-            <form>
               <input
                 type="file"
                 id="fileInput"
@@ -152,10 +164,7 @@ function Example() {
               />
 
               <br /><br />
-              <button type="button" onClick={handleSubmit} className="btn btn-secondary">
-                Change
-              </button>
-            </form>
+              <button type="button" className="btn btn-secondary" onClick={handleSubmit} >Change</button>
           </center>
         </Modal.Body>
       </Modal>

@@ -5,12 +5,12 @@ import Image from 'react-bootstrap/Image';
 import Nav from 'react-bootstrap/Nav';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import JSZip from 'jszip';
 
 function DefaultExample() {
     const [Email, setEmail] = useState('');
     const [data, setData] = useState([]);
     const [imageUrls, setImageUrls] = useState({});
-
     useEffect(() => {
         // Wywołaj pobieranie danych użytkownika po zalogowaniu
         axios.get('http://localhost:8080/api/User/Current', {
@@ -49,33 +49,47 @@ function DefaultExample() {
 
     useEffect(() => {
         // Pobierz i zaktualizuj obrazy dla każdego elementu w danych
-        data.forEach(item => {
+        const imageNames = data.map((item) => item.koloIdKola.image);
             // Sprawdź, czy obraz został już pobrany
-            if (!imageUrls[item.koloIdKola.image]) {
-                axios.get(`http://localhost:8080/api/Image/download/${item.koloIdKola.image}`, {
-                    headers: {
-                        Accept: 'application/octet-stream',
-                        'Content-Type': 'application/json',
-                        Authorization: `Bearer ${sessionStorage.getItem('authdata')}`,
-                    },
-                    responseType: 'blob',
-                })
-                .then((response) => {
-                    const blob = new Blob([response.data], { type: 'image/jpeg' });
-                    const imageUrl = URL.createObjectURL(blob);
-                    
-                    // Aktualizuj stan z adresem URL obrazu
-                    setImageUrls(prevState => ({
-                        ...prevState,
-                        [item.koloIdKola.image]: imageUrl,
-                    }));
-                })
-                .catch((error) => {
-                    console.error(error);
-                    sessionStorage.removeItem('authdata');
+            axios
+            .get(`http://localhost:8080/api/Image/download`, {
+              headers: {
+                Accept: 'application/octet-stream',
+                'Content-Type': 'application/json',
+                Authorization: `Bearer ${sessionStorage.getItem('authdata')}`,
+              },
+              responseType: 'blob',
+              params: {
+                fileNames: imageNames
+              }
+            })
+            .then((response) => {
+                // Rozpakuj plik ZIP i uzyskaj listę nazw obrazków
+                const zipData = response.data;
+                const jszip = new JSZip();
+                
+                return jszip.loadAsync(zipData);
+              })
+              .then((zip) => {
+
+                  zip.forEach((relativePath, file) => {
+                    if (!file.dir) { // Pomijamy foldery w archiwum
+                      file.async('blob').then((blob) => {
+                        const imageUrl = URL.createObjectURL(blob);
+                        setImageUrls((prevImageUrls) => ({
+                            ...prevImageUrls,
+                            [relativePath]: imageUrl,
+                          }));
+                        });
+                    }
                 });
-            }
-        });
+                // Aktualizuj stan z przyporządkowaniem obrazków
+              })
+            .catch((error) => {
+              console.error(error);
+              sessionStorage.removeItem('authdata');
+            });
+        
     }, [data, imageUrls]);
     return (
         <>

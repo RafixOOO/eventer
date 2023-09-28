@@ -5,6 +5,7 @@ import Modal from 'react-bootstrap/Modal';
 import axios from 'axios';
 import Image from 'react-bootstrap/Image';
 import PersonChange from './personChange';
+import JSZip from 'jszip';
 
 function Example() {
   const [show, setShow] = useState(false);
@@ -12,7 +13,7 @@ function Example() {
   const [nazwisko, setNazwisko] = useState('');
   const [id, setId] = useState('');
   const [image, setImage] = useState('');
-  const [obraze, setObrazek] = useState('');
+  const [obrazek, setObrazek] = useState('');
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -111,27 +112,45 @@ function Example() {
   }, [id]); // Zależność od zmiennej id - efekt wywoła się, gdy id zostanie zmienione
 
   useEffect(() => {
+
+    const fileNames = [image];
     // Wywołaj pobieranie obrazka użytkownika po zalogowaniu
     if (image) {
       axios
-        .get(`http://localhost:8080/api/Image/download/${image}`, {
-          headers: {
-            Accept: 'application/octet-stream',
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${sessionStorage.getItem('authdata')}`,
-          },
-          responseType: 'blob', // Ustaw typ odpowiedzi na 'blob' (dla obrazka)
-        })
-        .then((response) => {
-          const blob = new Blob([response.data], { type: 'image/jpeg' });
-          const imageUrl = URL.createObjectURL(blob);
-          setObrazek(imageUrl);
-          setImage("");
-        })
-        .catch((error) => {
-          console.error(error);
-          sessionStorage.removeItem('authdata');
+      .get('http://localhost:8080/api/Image/download', {
+        headers: {
+          Accept: 'application/octet-stream',
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${sessionStorage.getItem('authdata')}`,
+        },
+        responseType: 'blob', // Ustaw typ odpowiedzi na 'blob'
+        params: {
+          fileNames: fileNames.join(',')
+        }
+      })
+      .then((response) => {
+        const zipData = response.data;
+        const jszip = new JSZip();
+        
+        return jszip.loadAsync(zipData);
+      })
+      .then((zip) => {
+        // Tutaj możesz przetwarzać zawartość archiwum ZIP (zdjęcia) w zależności od Twoich potrzeb
+        // Przykład: Wyświetlanie pierwszego zdjęcia
+        zip.forEach((relativePath, file) => {
+          if (!file.dir) { // Pomijamy foldery w archiwum
+            file.async('blob').then((blob) => {
+              const imageUrl = URL.createObjectURL(blob);
+              setObrazek(imageUrl);
+            });
+            return; // Wyjście po przetworzeniu pierwszego pliku (zdjęcia)
+          }
         });
+      })
+      .catch((error) => {
+        console.error(error);
+        sessionStorage.removeItem('authdata');
+      });
     }
   }, [image]);
   return (
@@ -152,7 +171,7 @@ function Example() {
 
           <center>
 
-            <Image style={{ objectFit: 'contain', maxHeight: '180px', maxWidth: '171px' }} src={obraze} roundedCircle />
+            <Image style={{ objectFit: 'contain', maxHeight: '180px', maxWidth: '171px' }} src={obrazek} roundedCircle />
             <br /><br />
             <div style={{ fontSize: '150%' }}>
               {imie} {nazwisko}
