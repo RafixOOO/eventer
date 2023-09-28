@@ -73,14 +73,14 @@ function DefaultExample() {
             .then((zip) => {
 
                 zip.forEach((relativePath, file) => { // Pomijamy foldery w archiwum
-                        file.async('blob').then((blob) => {
-                            const imageUrl = URL.createObjectURL(blob);
-                            setImageUrls((prevImageUrls) => ({
-                                ...prevImageUrls,
-                                [relativePath]: imageUrl,
-                            }));
-                        });
-                    
+                    file.async('blob').then((blob) => {
+                        const imageUrl = URL.createObjectURL(blob);
+                        setImageUrls((prevImageUrls) => ({
+                            ...prevImageUrls,
+                            [relativePath]: imageUrl,
+                        }));
+                    });
+
                 });
                 // Aktualizuj stan z przyporządkowaniem obrazków
             })
@@ -109,9 +109,12 @@ function DefaultExample() {
                         <div className="ms-2 me-auto">
                             <div className="fw-bold"><Nav.Link href="/groups">{item.koloIdKola.nazwa}</Nav.Link></div>
                         </div>
-                        <Badge bg="danger" pill>
-                            {item.badges}
-                        </Badge>
+                        {item.badges > 0 && (
+                            <Badge bg="danger" pill>
+                                {item.badges}
+                            </Badge>
+                        )}
+
                     </ListGroup.Item>
                 ))}
             </ListGroup>
