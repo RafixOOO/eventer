@@ -43,65 +43,65 @@ function DefaultExample() {
             })
             .catch(error => {
                 console.error(error);
-                sessionStorage.removeItem('authdata');
+
             });
     }, [Email]);
 
     useEffect(() => {
         // Pobierz i zaktualizuj obrazy dla każdego elementu w danych
         const imageNames = data.map((item) => item.koloIdKola.image);
-            // Sprawdź, czy obraz został już pobrany
-            axios
+        // Sprawdź, czy obraz został już pobrany
+        axios
             .get(`http://localhost:8080/api/Image/download`, {
-              headers: {
-                Accept: 'application/octet-stream',
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${sessionStorage.getItem('authdata')}`,
-              },
-              responseType: 'blob',
-              params: {
-                fileNames: imageNames
-              }
+                headers: {
+                    Accept: 'application/octet-stream',
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${sessionStorage.getItem('authdata')}`,
+                },
+                responseType: 'blob',
+                params: {
+                    fileNames: imageNames.join(',')
+                }
             })
             .then((response) => {
                 // Rozpakuj plik ZIP i uzyskaj listę nazw obrazków
                 const zipData = response.data;
                 const jszip = new JSZip();
-                
-                return jszip.loadAsync(zipData);
-              })
-              .then((zip) => {
 
-                  zip.forEach((relativePath, file) => {
+                return jszip.loadAsync(zipData);
+            })
+            .then((zip) => {
+
+                zip.forEach((relativePath, file) => {
                     if (!file.dir) { // Pomijamy foldery w archiwum
-                      file.async('blob').then((blob) => {
-                        const imageUrl = URL.createObjectURL(blob);
-                        setImageUrls((prevImageUrls) => ({
-                            ...prevImageUrls,
-                            [relativePath]: imageUrl,
-                          }));
+                        file.async('blob').then((blob) => {
+                            const imageUrl = URL.createObjectURL(blob);
+                            setImageUrls((prevImageUrls) => ({
+                                ...prevImageUrls,
+                                [relativePath]: imageUrl,
+                            }));
                         });
                     }
                 });
                 // Aktualizuj stan z przyporządkowaniem obrazków
-              })
+            })
             .catch((error) => {
-              console.error(error);
-              sessionStorage.removeItem('authdata');
+                console.error(error);
+
             });
-        
+
     }, [data, imageUrls]);
     return (
         <>
             <ListGroup as="ol">
                 {data.map(item => (
                     <ListGroup.Item
-                    
+
                         as="li"
                         key={item.koloIdKola.id}
                         className="d-flex justify-content-between align-items-start"
                     >
-                        
+
                         <Image
                             style={{ maxWidth: '100%', height: 'auto', maxHeight: '25px' }}
                             src={imageUrls[item.koloIdKola.image]}
