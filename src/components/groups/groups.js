@@ -72,8 +72,7 @@ function DefaultExample() {
             })
             .then((zip) => {
 
-                zip.forEach((relativePath, file) => {
-                    if (!file.dir) { // Pomijamy foldery w archiwum
+                zip.forEach((relativePath, file) => { // Pomijamy foldery w archiwum
                         file.async('blob').then((blob) => {
                             const imageUrl = URL.createObjectURL(blob);
                             setImageUrls((prevImageUrls) => ({
@@ -81,7 +80,7 @@ function DefaultExample() {
                                 [relativePath]: imageUrl,
                             }));
                         });
-                    }
+                    
                 });
                 // Aktualizuj stan z przyporządkowaniem obrazków
             })
@@ -90,7 +89,7 @@ function DefaultExample() {
 
             });
 
-    }, [data, imageUrls]);
+    }, [data]);
     return (
         <>
             <ListGroup as="ol">

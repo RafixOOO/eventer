@@ -1,7 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Button } from 'react-bootstrap';
-import Form from 'react-bootstrap/Form';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
 function TextControlsExample() {
@@ -23,17 +21,19 @@ function TextControlsExample() {
     setIsPublic(e.target.value === 'true');
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Tutaj możesz wykonać odpowiednie operacje na danych (np. wysłać na serwer itp.)
     console.log('Name:', name);
     console.log('Description:', description);
     console.log('Is Public:', isPublic);
-    create();
+
+    await grupa();
+
+
   };
 
-  const create = () => {
+  const grupa = () => {
     axios
       .post(`http://localhost:8080/api/Kolo/Add`, {
         nazwa: name,
@@ -49,7 +49,6 @@ function TextControlsExample() {
       .then(response => {
         const responseData = response.data;
         setKolo(responseData);
-        current();
       })
       .catch((error) => {
         console.log(error);
@@ -59,7 +58,7 @@ function TextControlsExample() {
 
   }
 
-  const current = () => {
+  useEffect(() => {
     axios.get('http://localhost:8080/api/User/Current', {
       headers: {
         'Content-Type': 'application/json',
@@ -69,19 +68,16 @@ function TextControlsExample() {
       .then(response => {
         const responseData = response.data;
         setUser(responseData);
-        setTimeout(() => {
-          connect();
-        }, 2000);
       })
       .catch(error => {
         console.error(error);
         sessionStorage.removeItem('authdata');
         window.location.reload();
       });
-  }
+    }, []);
 
-  const connect = () => {
-    if(User){
+  useEffect(() => {
+    if (kolo && User) {
     axios
       .post(`http://localhost:8080/api/KoloUser/Add`, {
         eventsAdder: true,
@@ -98,32 +94,35 @@ function TextControlsExample() {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${sessionStorage.getItem('authdata')}`,
           },
+        }).then(() => {
+          window.location.reload();
         })
       .catch((error) => {
         console.log(error);
         sessionStorage.removeItem('authdata');
       });
-      }
-
-  }
+    }
+  }, [kolo, User]);
 
   return (
-    <Form>
-      <Form.Group className="mb-3">
-        <Form.Label>Name</Form.Label>
-        <Form.Control type="text" value={name} onChange={handleNameChange} required />
-      </Form.Group>
-      <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1" value={description} onChange={handleDescriptionChange} required>
-        <Form.Label>Description</Form.Label>
-        <Form.Control as="textarea" rows={3} />
-      </Form.Group>
-      <Form.Select aria-label="Default select example" value={isPublic ? 'true' : 'false'} onChange={handleIsPublicChange}>
-        <option value="false">private</option>
-        <option value="true">public</option>
-      </Form.Select>
-      <br />
-      <Button variant="primary" onClick={handleSubmit}>Create</Button>
-    </Form>
+    <form onSubmit={handleSubmit}>
+        <div className="mb-3">
+          <label htmlFor="name" className="form-label">Name</label>
+          <input type="text" id="name" name="name" className="form-control" value={name} onChange={handleNameChange} required />
+        </div>
+        <div className="mb-3">
+          <label htmlFor="description" className="form-label">Description</label>
+          <textarea id="description" name="description" className="form-control" value={description} onChange={handleDescriptionChange} rows={3} required />
+        </div>
+        <div className="mb-3">
+          <label htmlFor="isPublic" className="form-label">Is Public</label>
+          <select id="isPublic" name="isPublic" className="form-select" value={isPublic ? 'true' : 'false'} onChange={handleIsPublicChange}>
+            <option value="false">private</option>
+            <option value="true">public</option>
+          </select>
+        </div>
+        <button type="submit" className="btn btn-primary">Create</button>
+      </form>
   );
 }
 
