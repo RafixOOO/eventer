@@ -67,8 +67,7 @@ function Example() {
                                 type="date"
                                 id="date"
                                 name="imie"
-                                placeholder='Place'
-                                value={currentDate}
+                                placeholder={currentDate}
                                 required
                             />
                             <br /><br />
