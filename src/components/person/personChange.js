@@ -128,7 +128,7 @@ function Example() {
       <Modal show={show} onHide={handleClose}>
       {showAlert && (
         <Alert style={{ position: 'absolute', top: '20px', right: '35px' }} className="alert alert-success" role="alert" onClose={() => setShowAlert(false)} dismissible>
-          Dane zostały zmienione!
+          Data has been changed!
         </Alert>
       )}
         <Modal.Header closeButton>
