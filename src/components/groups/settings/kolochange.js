@@ -42,6 +42,11 @@ function Example() {
                                 required
                             />
                             <br /><br />
+                            <select aria-label="Default select example">
+                                <option value="false">not visible</option>
+                                <option value="true">visible</option>
+                            </select>
+                            <br /><br />
                             <textarea
                                 id="nazwisko"
                                 name="nazwisko"
