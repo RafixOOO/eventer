@@ -10,6 +10,7 @@ import Groups from '../groups/groups';
 import Create from '../groups/creategroup';
 import Find from '../groups/findgroup';
 import Dropdown from 'react-bootstrap/Dropdown';
+import Logo from './eventer.png';
 
 
 const options = [
@@ -25,7 +26,7 @@ function Navigation() {
     <>
       <Navbar collapseOnSelect expand="lg" className="bg-body-tertiary" bg="dark" data-bs-theme="dark">
         <Container fluid>
-          <Navbar.Brand>Eventer <sup>1.0</sup></Navbar.Brand>
+          <Navbar.Brand><img style={{ objectFit: 'contain', maxHeight: '30px', maxWidth: '30px', paddingBottom: '5px'  }} src={Logo}  alt='' />venter <sup>1.0</sup></Navbar.Brand>
 
           <Navbar.Toggle aria-controls="navbarScroll" />
           <Navbar.Collapse id="navbarScroll">
