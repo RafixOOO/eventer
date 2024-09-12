@@ -152,12 +152,14 @@ function Example() {
                 type="text"
                 id="imie"
                 name="imie"
+                placeholder='Name'
                 onChange={handleImieChange}
                 required
               />
               <input
                 type="text"
                 id="nazwisko"
+                placeholder='Surname'
                 name="nazwisko"
                 onChange={handleNazwiskoChange}
                 required
